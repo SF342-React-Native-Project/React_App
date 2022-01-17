@@ -74,6 +74,11 @@ const App: () => Node = () => {
             {/* use component here */}
             <Text>Test</Text>
             <Test2/>
+            {/* Tae */}
+            {/* Poom */}
+            {/* Mac */}
+            {/* Nice */}
+            {/* Beem */}
 
         </View>
       </ScrollView>
