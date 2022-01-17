@@ -1,31 +1,31 @@
-import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+// import React from 'react';
+// import {
+//   SafeAreaView,
+//   ScrollView,
+//   StatusBar,
+//   StyleSheet,
+//   Text,
+//   useColorScheme,
+//   View,
+// } from 'react-native';
 
 
-const Test2: () => Node = () => {
-    const isDarkMode = useColorScheme() === 'dark';
+// const Test2 = () => {
+//     const isDarkMode = useColorScheme() === 'dark';
   
-    return (
-      <SafeAreaView>
-        <ScrollView contentInsetAdjustmentBehavior="automatic">
-          <View>
+//     return (
+//       <SafeAreaView>
+//         <ScrollView contentInsetAdjustmentBehavior="automatic">
+//           <View>
   
-              {/* use component here */}
-              <Text>test2</Text>
+//               {/* use component here */}
+//               <Text>test2</Text>
   
   
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    );
-  };
+//           </View>
+//         </ScrollView>
+//       </SafeAreaView>
+//     );
+//   };
 
-export default Test2;
+// export default Test2;
