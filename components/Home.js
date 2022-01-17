@@ -13,6 +13,9 @@ const Home = ({navigation}) => {
                 <TouchableOpacity onPress={() => navigation.navigate('Detail')}>
                     <Text>Click me to detail </Text>
                 </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                    <Text>Click me to login </Text>
+                </TouchableOpacity>
             </View>
         </ScrollView>
     )

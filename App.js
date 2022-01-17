@@ -114,18 +114,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Detail from './components/Detail';
 import Home from './components/Home'
-
-
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <TouchableOpacity onPress={() => navigation.navigate('')} >
-        <Text>Home Screen</Text>
-      </TouchableOpacity>
-      
-    </View>
-  );
-}
+import Login from './components/Login';
 
 
 const Stack = createStackNavigator();
@@ -136,6 +125,7 @@ const App = () => {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={Home}/>
         <Stack.Screen name="Detail" component={Detail} />
+        <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
   );
