@@ -115,7 +115,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Detail from './components/Detail';
 import Home from './components/Home'
 import Login from './components/Login';
-
+import PriceChart from './components/PriceChart';
 
 const Stack = createStackNavigator();
 
@@ -126,6 +126,7 @@ const App = () => {
         <Stack.Screen name="Home" component={Home}/>
         <Stack.Screen name="Detail" component={Detail} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="PriceChart" component={PriceChart} />
       </Stack.Navigator>
     </NavigationContainer>
   );
