@@ -28,6 +28,7 @@ const PriceChart = ({ navigation }) => {
     useEffect(() => {
         fetch(PorkURL).then((response) => response.json())
             .then((json) => {
+                console.log(json)
                 setData(json.price_list);
                 setTitle(json.product_name);
             })
@@ -113,13 +114,15 @@ const styles = StyleSheet.create({
         fontSize: 50,
         color: "#011f49",
         paddingLeft: 20,
-        paddingTop: 20
+        paddingTop: 20,
+        fontWeight: "bold"
     },
 
     FoodNameText: {
         fontSize: 20,
         color: "#000000",
-        paddingLeft: 25
+        paddingLeft: 25,
+        fontWeight: "bold"
     }
 
 
