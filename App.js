@@ -115,18 +115,19 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Detail from './components/Detail';
 import Home from './components/Home'
 import Login from './components/Login';
+import PriceChart from './components/PriceChart';
 import Price from './components/Price';
-
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={Home}/>
-        <Stack.Screen name="Detail" component={Detail} />
-        <Stack.Screen name="Login" component={Login} />
+      <Stack.Navigator >
+        <Stack.Screen name="Home" component={Home} options={{ header: () => null }} />
+        <Stack.Screen name="Detail" component={Detail} options={{ header: () => null }} />
+        <Stack.Screen name="Login" component={Login} options={{ header: () => null }} />
+        <Stack.Screen name="PriceChart" component={PriceChart} options={{ header: () => null }} />
         <Stack.Screen name="Price" component={Price} />
       </Stack.Navigator>
     </NavigationContainer>

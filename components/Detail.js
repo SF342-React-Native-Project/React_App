@@ -7,7 +7,10 @@ import Home from "./Home";
 
 const Detail = ({navigation}) => {
     return(
-        <ScrollView>
+        <ScrollView style={styles.body}>
+            <View style={styles.header}>
+                <Text style={styles.headerText}>MOC</Text>
+            </View>
             <View>
                 <Text>DetailsScreen</Text>
                 <TouchableOpacity onPress={() => navigation.navigate('Home')}>
@@ -25,3 +28,20 @@ const Detail = ({navigation}) => {
 }
 
 export default Detail;
+
+const styles = StyleSheet.create({
+    body: {
+        flex: 1,
+        flexDirection: 'column',
+    },  
+    headerText: {
+        fontSize: 34,
+        fontWeight: 'bold',
+        color: 'rgb(203,162,0)',
+    }, 
+    header: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'rgb(8,26,59)',
+    },
+})
