@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 
 import Detail from "./Detail";
+import Price from './Price';
 
 const Home = ({navigation}) => {
     return(
@@ -15,6 +16,9 @@ const Home = ({navigation}) => {
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                     <Text>Click me to login </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Price')}>
+                    <Text>Click me to Price </Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
