@@ -122,11 +122,11 @@ const Stack = createStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={Home}/>
-        <Stack.Screen name="Detail" component={Detail} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="PriceChart" component={PriceChart} />
+      <Stack.Navigator >
+        <Stack.Screen name="Home" component={Home} options={{ header: () => null }} />
+        <Stack.Screen name="Detail" component={Detail} options={{ header: () => null }} />
+        <Stack.Screen name="Login" component={Login} options={{ header: () => null }} />
+        <Stack.Screen name="PriceChart" component={PriceChart} options={{ header: () => null }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
