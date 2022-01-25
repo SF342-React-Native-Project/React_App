@@ -16,7 +16,7 @@ const Meat = (props) => {
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: '#FFF',
+    backgroundColor: '#707070',
     padding: 15,
     borderRadius: 10,
     flexDirection: 'row',
@@ -39,6 +39,9 @@ const styles = StyleSheet.create({
   },
   itemText: {
     // maxWidth: '100%',
+    color: "#FFFFFF",
+    fontWeight: 'bold',
+    fontSize: 16,
   },
   circular: {
     width: 12,
