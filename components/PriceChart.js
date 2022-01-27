@@ -86,13 +86,19 @@ const PriceChart = ({ navigation }) => {
                             </VictoryGroup>
                         </VictoryChart> */}
 
+                        {/* Table Header */}
+                        <Text style={styles.tableHeader}>Price Table</Text>
+
+                        {/* Table */}
                         <View>
                             <FlatList
                                 data={data}
+                                inverted={true}
                                 renderItem={({ item }) => (
+                                    
                                     <View style={{ paddingBottom: 10 }}>
                                         <Text>
-                                            {item.date}, {item.price_min}, {item.price_max}
+                                            {item.date.substring(0, 10)}, {(item.price_min+item.price_max)/2}
                                         </Text>
                                     </View>
                                 )}
@@ -123,6 +129,17 @@ const styles = StyleSheet.create({
         color: "#000000",
         paddingLeft: 25,
         fontWeight: "bold"
+    },
+
+    tableHeader: {
+        fontSize: 20,
+        color: "#ffffff",
+        paddingLeft: 25,
+        fontWeight: "bold",
+        backgroundColor: "#011f49",
+        padding: 5,
+        margin: 20,
+        borderRadius: 25,
     }
 
 
