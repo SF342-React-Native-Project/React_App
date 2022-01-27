@@ -20,7 +20,7 @@ for(let i = 0; i < meatList.length; i++){
 
 const FirstRoute = () => (
   <ScrollView style={styles.first}>
-    <View style={{ paddingTop: 20 }}></View>
+    <View style={{ paddingTop: 20, }}></View>
     <View>
       {forLoopMeat}
     </View>
@@ -55,16 +55,17 @@ export default function Detail() {
     const [index, setIndex] = React.useState(0);
     const [routes] = React.useState([
         { key: 'first', title: 'เนื้อสัตว์' },
-        { key: 'second', title: 'Second' },
-        { key: 'third', title: 'third' },
+        { key: 'second', title: 'ผักใบ/ผล' },
+        { key: 'third', title: 'ผลไม้' },
     ]);
 
     return(
         <View style={styles.body}>
             <View style={styles.header}>
-                <Text style={styles.headerText}>MOC</Text>
+                <Text style={styles.headerText}>PRICE</Text>
             </View>
             <TabView 
+                
                 navigationState={{ index, routes, }}
                 renderScene={renderScene}
                 onIndexChange={setIndex}
@@ -75,12 +76,15 @@ export default function Detail() {
 }
 
 const styles = StyleSheet.create({
+    tabText: {
+      color: '#000000'
+    },  
     render: {
         backgroundColor: '#ff4081'
     },
     first: {
         flex: 1, 
-        backgroundColor: '#ff4081',
+        backgroundColor: '#FFFFFF',
     },
     second: {
         flex: 1, 
@@ -97,11 +101,13 @@ const styles = StyleSheet.create({
     headerText: {
         fontSize: 34,
         fontWeight: 'bold',
-        color: 'rgb(203,162,0)',
+        color: 'rgb(8,26,59)',
     }, 
     header: {
-        alignItems: 'center',
+        marginLeft: 10,
+        alignItems: 'flex-start',
         justifyContent: 'center',
-        backgroundColor: 'rgb(8,26,59)',
+        backgroundColor: '#FFFFFFF',
+        padding: 10,
     },
 })
