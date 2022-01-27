@@ -4,19 +4,20 @@ import { NavigationContainer } from '@react-navigation/native';
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { useEffect, useState } from 'react';
 import { VictoryBar, VictoryChart, VictoryGroup, VictoryLine, VictoryScatter, VictoryTheme } from 'victory-native';
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
-const PorkURL = "https://dataapi.moc.go.th/gis-product-prices?product_id=P11001&from_date=2021-12-01&to_date=2023-12-31"
+const PorkURL = "https://dataapi.moc.go.th/gis-product-prices?product_id=P11001&from_date=2021-12-15&to_date=2023-12-31"
 
 const barData = {
     minPrice: [{ x: "date1", y: 200 },
-                { x: "date2", y: 250 },
-                { x: "date3", y: 180 },
-                { x: "date4", y: 220 },
-                { x: "date5", y: 230 },
-                { x: "date6", y: 220 },
-                { x: "date7", y: 240 },
-                { x: "date8", y: 230 },
-            ]
+    { x: "date2", y: 250 },
+    { x: "date3", y: 180 },
+    { x: "date4", y: 220 },
+    { x: "date5", y: 230 },
+    { x: "date6", y: 220 },
+    { x: "date7", y: 240 },
+    { x: "date8", y: 230 },
+    ]
 }
 
 const PriceChart = ({ navigation }) => {
@@ -28,7 +29,7 @@ const PriceChart = ({ navigation }) => {
     useEffect(() => {
         fetch(PorkURL).then((response) => response.json())
             .then((json) => {
-                console.log(json)
+                // console.log(json)
                 setData(json.price_list);
                 setTitle(json.product_name);
             })
@@ -42,77 +43,63 @@ const PriceChart = ({ navigation }) => {
             {isLoading ? <ActivityIndicator /> :
                 (
                     <ScrollView>
+
+                        {/* Main Header */}
                         <Text style={styles.headerText}>Graph</Text>
                         <Text style={styles.FoodNameText}>{title}</Text>
 
-                        <VictoryChart
-                            theme={VictoryTheme.material}
-                            domainPadding={10}
-                        >
-                            <VictoryGroup>
-                                <VictoryLine style={{
-                                    data: { stroke: "#011f49" },
-                                    parent: { border: "1px solid #ccc" }
-                                }}
-                                    data={barData.minPrice}>
+                        {/* Chart */}
+                        <View>
+                            <VictoryChart theme={VictoryTheme.material} domainPadding={10}>
+                                <VictoryGroup>
+                                    <VictoryLine style={{
+                                        data: { stroke: "#011f49" },
+                                        parent: { border: "1px solid #ccc" }
+                                    }}
+                                        data={barData.minPrice}>
 
-                                </VictoryLine>
+                                    </VictoryLine>
 
-                                <VictoryScatter
-                                    style={{ data: { fill: "#011f49" } }}
-                                    size={7}
-                                    data={barData.minPrice}
-                                >
-
-                                </VictoryScatter>
-
-                            </VictoryGroup>
-                        </VictoryChart>
-
-                        {/* Bar Graph */}
-
-                        {/* <VictoryChart
-                            theme={VictoryTheme.material}
-                            domainPadding={20}
-                        >
-                            <VictoryGroup>
-                                <VictoryBar
-                                    barWidth={8}
-                                    alignment="center"
-                                    style={{ data: { fill: "#011f49" } }}
-                                    data={barData.minPrice}>
-
-                                </VictoryBar>
-                            </VictoryGroup>
-                        </VictoryChart> */}
+                                    <VictoryScatter
+                                        style={{ data: { fill: "#011f49" } }}
+                                        size={7}
+                                        data={barData.minPrice}
+                                    >
+                                    </VictoryScatter>
+                                </VictoryGroup>
+                            </VictoryChart>
+                        </View>
 
                         {/* Table Header */}
                         <Text style={styles.tableHeader}>Price Table</Text>
 
                         {/* Table */}
-                        <View>
-                            <FlatList
-                                data={data}
-                                inverted={true}
-                                renderItem={({ item }) => (
-                                    
-                                    <View style={{ paddingBottom: 10 }}>
-                                        <Text>
-                                            {item.date.substring(0, 10)}, {(item.price_min+item.price_max)/2}
-                                        </Text>
-                                    </View>
-                                )}
-                            />
-                        </View>
+                        <SafeAreaView style={styles.tableMargin}>
+
+                            <Table borderStyle={{borderWidth: 2, borderColor: '#555555' }}>
+                                <Row data={["รายการ", "วันที่", "ราคา\nต่ำสุด-สูงสุด", "ราคาเฉลี่ย"]} style={styles.firstTableRow} textStyle={styles.firstRowTextStyle} />
+                            </Table>
+
+                                <FlatList
+                                    data={data}
+                                    inverted={true}
+                                    renderItem={({ item }) => (
+
+                                        <View>
+                                            <Table borderStyle={{borderWidth: 2, borderColor: '#555555' }}>
+                                                <Row data={[title, item.date.substring(0, 10),[item.price_max, "/\n",item.price_min],
+                                                (item.price_min + item.price_max) / 2]} textStyle={styles.textStyle}/>
+                                            </Table>
+                                        </View>
+
+                                    )}
+                                />
+
+                        </SafeAreaView>
                     </ScrollView>
                 )}
-
         </SafeAreaView>
-
-
-
-
-    )
+    ) 
 }
 
 const styles = StyleSheet.create({
@@ -140,9 +127,28 @@ const styles = StyleSheet.create({
         padding: 5,
         margin: 20,
         borderRadius: 25,
-    }
+    },
 
+    tableMargin: {
+        margin: 20,
+    },
 
+    firstTableRow: {
+        backgroundColor: "#cccccc",
+    },
+
+    firstRowTextStyle: {
+        textAlign: "center",
+        fontSize: 11,
+        fontWeight: "bold",
+        padding:10,
+    },
+
+    textStyle: {
+        textAlign: "center",
+        fontSize: 10,
+        padding:3,
+    },
 });
 
 export default PriceChart;
