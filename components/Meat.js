@@ -1,33 +1,49 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 const Meat = (props) => {
 
   return (
     <View style={styles.item}>
-        <View style={styles.itemLeft}>
-            <View style={styles.square}></View>
-            <Text style={styles.itemText}>{props.text}</Text>
+        <View style={styles.imageContainer}>
+          <Image source={require('./img/pigP.png')} style={styles.pigLogo}/>
         </View>
-        <View style={styles.circular}></View>
+        <View style={styles.textDetail}>
+          <Text style={styles.itemText}>{props.text}</Text>
+          <Text style={styles.itemText}>200 บาท</Text>
+          <Text style={styles.itemText}>12/12/12</Text>
+        </View>    
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  textDetail: {
+    flex: 1,
+    justifyContent: 'space-between',
+    margin: 10,
+  },  
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    
+  },
+  pigLogo: {
+    width: 100,
+    height: 100,
+    resizeMode: 'cover',
+  },  
   item: {
     backgroundColor: 'rgb(8,26,59)',
-    padding: 30,
+    height: 200,
     borderRadius: 10,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     marginBottom: 20,
   },
   itemLeft: {
     flexDirection: 'row',
-    alignItems: 'center',
-    flexWrap: 'wrap'
+    alignItems: 'flex-start',
   },
   square: {
     width: 24,
@@ -41,7 +57,7 @@ const styles = StyleSheet.create({
     // maxWidth: '100%',
     color: "#FFFFFF",
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 20,
   },
   circular: {
     width: 12,
