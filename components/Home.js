@@ -4,6 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import AntDesign from 'react-native-vector-icons/AntDesign'
+import Entypo from 'react-native-vector-icons/Entypo'
 
 
 import Detail from "./Detail";
@@ -20,22 +23,25 @@ const Home = ({ navigation }) => {
         <Tab.Navigator
             initialRouteName="Detail"
             tabBarOptions={{
-                activeTintColor: '#000000',
-                activeBackgroundColor: 'grey',
-                inactiveBackgroundColor: 'grey',
-                inactiveTintColor: '#ffffff',
-                labelStyle: { fontSize: 14, paddingBottom: 7 },
-
-            }}
+                activeTintColor: '#FFFFFF',
+                activeBackgroundColor: 'rgb(8,26,59)',
+                inactiveBackgroundColor: 'rgb(8,26,59)',
+                inactiveTintColor: 'grey',
+                  style: {
+                    height: 67,
+                  },
+                }}
+                
+            
 
         >
             <Tab.Screen
                 name="Detail"
                 component={Detail}
                 options={{
-                    tabBarLabel: 'Detail',
+                    tabBarLabel:() => {return null},
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="home" color={color} size={size} />
+                        <MaterialCommunityIcons name="home" color={color} size={36} />
                     ),
                 }}
             />
@@ -43,9 +49,9 @@ const Home = ({ navigation }) => {
                 name="PriceChart"
                 component={PriceChart}
                 options={{
-                    tabBarLabel: 'PriceChart',
+                    tabBarLabel:() => {return null},
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="virus" color={color} size={size} />
+                        <Entypo name="user" color={color} size={32} />
                     ),
                 }}
             />
