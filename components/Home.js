@@ -11,6 +11,7 @@ import Entypo from 'react-native-vector-icons/Entypo'
 
 import Detail from "./Detail";
 import PriceChart from "./PriceChart";
+import Account from "./AccountScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -48,6 +49,16 @@ const Home = ({ navigation }) => {
             <Tab.Screen
                 name="PriceChart"
                 component={PriceChart}
+                options={{
+                    tabBarLabel:() => {return null},
+                    tabBarIcon: ({ color, size }) => (
+                        <Entypo name="line-graph" color={color} size={32} />
+                    ),
+                }}
+            />
+            <Tab.Screen
+                name="Account"
+                component={Account}
                 options={{
                     tabBarLabel:() => {return null},
                     tabBarIcon: ({ color, size }) => (

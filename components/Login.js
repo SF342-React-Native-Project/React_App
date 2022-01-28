@@ -2,15 +2,16 @@ import React from "react";
 import {View, Text, StyleSheet, } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Login = ({navigation}) => {
     return(
-        <ScrollView>
-            <View>
-                <Text>Login Screen</Text>
-                
+        <SafeAreaView style={styles.body}>
+            <View style={styles.header}>
+
             </View>
-        </ScrollView>
+
+        </SafeAreaView>
  
     
         
@@ -18,3 +19,12 @@ const Login = ({navigation}) => {
 }
 
 export default Login;
+
+const styles = StyleSheet.create({
+    body: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
+})
