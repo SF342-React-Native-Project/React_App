@@ -26,7 +26,7 @@ const Account = ({ navigation }) => {
 
 
                 <View style={styles.mainSection}>
-                    <TouchableOpacity style={styles.sectionHelp}>
+                    <TouchableOpacity style={styles.sectionHelp} onPress={()=> navigation.navigate("Help")}>
                         <View style={styles.logoText}>
                             <View style={styles.startLogo}>
                                 <FontAwesome5 name="phone-alt" color={'grey'} size={16} />

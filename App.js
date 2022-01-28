@@ -116,6 +116,8 @@ import Detail from './components/Detail';
 import Home from './components/Home'
 import Login from './components/Login';
 import PriceChart from './components/PriceChart';
+import AcccountScreen from './components/AccountScreen';
+import HelpScreen from './components/HelpScreen';
 
 const Stack = createStackNavigator();
 
@@ -127,6 +129,8 @@ const App = () => {
         <Stack.Screen name="Detail" component={Detail} options={{ header: () => null }} />
         <Stack.Screen name="Login" component={Login} options={{ header: () => null }} />
         <Stack.Screen name="PriceChart" component={PriceChart} options={{ header: () => null }} />
+        <Stack.Screen name="Account" component={AcccountScreen} options={{ header: () => null }} />
+        <Stack.Screen name="Help" component={HelpScreen} options={{ header: () => null }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
