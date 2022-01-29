@@ -8,17 +8,7 @@ import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-ta
 
 const PorkURL = "https://dataapi.moc.go.th/gis-product-prices?product_id=P11001&from_date=2021-12-15&to_date=2023-12-31"
 
-const barData = {
-    minPrice: [{ x: "date1", y: 200 },
-    { x: "date2", y: 250 },
-    { x: "date3", y: 180 },
-    { x: "date4", y: 220 },
-    { x: "date5", y: 230 },
-    { x: "date6", y: 220 },
-    { x: "date7", y: 240 },
-    { x: "date8", y: 230 },
-    ]
-}
+var plotData = [{},{},{},{},{},{},{}];
 
 const PriceChart = ({ navigation }) => {
 
@@ -26,17 +16,24 @@ const PriceChart = ({ navigation }) => {
     const [data, setData] = useState([]);
     const [title, setTitle] = useState([]);
 
-    useEffect(() => {
-        fetch(PorkURL).then((response) => response.json())
-            .then((json) => {
-                // console.log(json)
-                setData(json.price_list);
-                setTitle(json.product_name);
-            })
-            .catch((error) => alert(error))
-            .finally(setLoading(false));
-    })
+    async function fetchData() {
+        const res = await fetch(PorkURL);
+        res
+            .json()
+            .then(res => {setData(res.price_list),setTitle(res.product_name), setLoading(false)})
+            .catch(err => setErrors(err));
+    }
 
+    useEffect(() => {
+        fetchData();
+    },[])
+
+    if(!isLoading){
+        for (var i = 0; i < 7; i++){
+            plotData[i] = {"x":data[i].date.substring(8, 10), "y":(data[i].price_min + data[i].price_max)/2}
+        }
+        console.log("this:",plotData)
+    }
 
     return (
         <SafeAreaView>
@@ -56,14 +53,14 @@ const PriceChart = ({ navigation }) => {
                                         data: { stroke: "#011f49" },
                                         parent: { border: "1px solid #ccc" }
                                     }}
-                                        data={barData.minPrice}>
+                                        data={plotData}>
 
                                     </VictoryLine>
 
                                     <VictoryScatter
                                         style={{ data: { fill: "#011f49" } }}
                                         size={7}
-                                        data={barData.minPrice}
+                                        data={plotData}
                                     >
                                     </VictoryScatter>
                                 </VictoryGroup>
