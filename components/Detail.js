@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   body: {
+    marginTop: 20,
     flex: 1,
     flexDirection: 'column',
   },
