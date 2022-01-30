@@ -25,8 +25,8 @@ const Home = ({ navigation }) => {
             initialRouteName="Detail"
             tabBarOptions={{
                 activeTintColor: '#FFFFFF',
-                activeBackgroundColor: 'rgb(8,26,59)',
-                inactiveBackgroundColor: 'rgb(8,26,59)',
+                activeBackgroundColor: '#083370',
+                inactiveBackgroundColor: '#083370',
                 inactiveTintColor: 'grey',
                   style: {
                     height: 67,

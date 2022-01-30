@@ -9,24 +9,43 @@ const Meat = (props) => {
           <Image source={require('./img/pigP.png')} style={styles.pigLogo}/>
         </View>
         <View style={styles.textDetail}>
-          <Text style={styles.itemText}>{props.text}</Text>
-          <Text style={styles.itemText}>200 บาท</Text>
-          <Text style={styles.itemText}>12/12/12</Text>
+          <Text style={styles.itemTextTop}>{props.text}</Text>
+          <Text style={styles.itemTextMid}>200.00 <Text style={{ fontSize: 14, color: '#FFF'}}>บาท/กก.</Text></Text>
+          <Text style={styles.itemTextBottom}>12/12/12</Text>
         </View>    
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  itemTextTop: {
+    // maxWidth: '100%',
+    color: "#FFFFFF",
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
+  itemTextMid: {
+    // maxWidth: '100%',
+    color: "red",
+    fontWeight: 'bold',
+    fontSize: 30,
+  },
+  itemTextBottom: {
+    // maxWidth: '100%',
+    color: "#FFFFFF",
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
   textDetail: {
-    flex: 1,
-    justifyContent: 'space-between',
+    flex: 2,
+    justifyContent: 'space-around',
     margin: 10,
   },  
   imageContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    margin: 15,
     
   },
   pigLogo: {
@@ -35,7 +54,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },  
   item: {
-    backgroundColor: 'rgb(8,26,59)',
+    backgroundColor: '#083370',
     height: 200,
     borderRadius: 10,
     flexDirection: 'row',
@@ -52,12 +71,6 @@ const styles = StyleSheet.create({
     opacity: 0.4,
     borderRadius: 5,
     marginRight: 15,
-  },
-  itemText: {
-    // maxWidth: '100%',
-    color: "#FFFFFF",
-    fontWeight: 'bold',
-    fontSize: 20,
   },
   circular: {
     width: 12,

@@ -10,8 +10,8 @@ const Help = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.body}>
             <View style={styles.header}>
-                <TouchableOpacity style={styles.backLogo} onPress={() => navigation.navigate("Account")}>
-                    <Ionicons name="chevron-back-outline" color={'rgb(8,26,59)'} size={42} />
+                <TouchableOpacity style={styles.backLogo} onPress={() => navigation.navigate("Home")}>
+                    <Ionicons name="chevron-back-outline" color={'#083370'} size={42} />
                 </TouchableOpacity>
                 <Text style={styles.headerText}>Help</Text>
             </View>
@@ -57,6 +57,13 @@ const Help = ({ navigation }) => {
                     </View>
                 </View>
 
+                <View style={styles.footer}>
+                    <TouchableOpacity style={styles.buttonContainer}>
+                        <Text style={styles.sendText}>
+                            SEND
+                        </Text>
+                    </TouchableOpacity>
+                </View> 
 
             </View>
         </SafeAreaView>
@@ -67,6 +74,18 @@ const Help = ({ navigation }) => {
 export default Help;
 
 const styles = StyleSheet.create({
+    sendText: {
+        color: '#FFFFFF',
+        fontWeight: 'bold',
+        fontSize: 16,
+    },  
+    buttonContainer: {
+        marginTop: 30,
+        backgroundColor: '#083370',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderRadius: 10,
+    },  
     buttonChoseFile: {
         backgroundColor: 'grey',
         borderRadius: 5,
@@ -145,7 +164,7 @@ const styles = StyleSheet.create({
     headerText: {
         fontSize: 32,
         fontWeight: 'bold',
-        color: 'rgb(8,26,59)',
+        color: '#083370',
     },
     imgUser: {
         margin: 10,

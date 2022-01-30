@@ -102,7 +102,7 @@ const PriceChart = ({ navigation }) => {
 const styles = StyleSheet.create({
     headerText: {
         fontSize: 50,
-        color: "#011f49",
+        color: "#083370",
         paddingLeft: 20,
         paddingTop: 20,
         fontWeight: "bold"
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
         color: "#ffffff",
         paddingLeft: 25,
         fontWeight: "bold",
-        backgroundColor: "#011f49",
+        backgroundColor: "#083370",
         padding: 5,
         margin: 20,
         borderRadius: 25,

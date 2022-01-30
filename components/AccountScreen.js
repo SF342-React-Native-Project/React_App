@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },  
     logout: {
-        backgroundColor: 'rgb(8,26,59)',
+        backgroundColor: '#083370',
         padding: 10,
         borderRadius: 5,
         justifyContent: 'center',
