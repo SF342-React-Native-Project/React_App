@@ -119,6 +119,7 @@ import PriceChart from './components/PriceChart';
 import AcccountScreen from './components/AccountScreen';
 import HelpScreen from './components/HelpScreen';
 import Register from './components/RegisterScreen';
+import DetailPrice from './components/DetailPrice';
 
 const Stack = createStackNavigator();
 
@@ -133,6 +134,7 @@ const App = () => {
         <Stack.Screen name="PriceChart" component={PriceChart} options={{ header: () => null }} />
         <Stack.Screen name="Account" component={AcccountScreen} options={{ header: () => null }} />
         <Stack.Screen name="Help" component={HelpScreen} options={{ header: () => null }} />
+        <Stack.Screen name="DetailPrice" component={DetailPrice}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
