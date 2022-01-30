@@ -9,7 +9,7 @@ const Meat = (props) => {
           <Image source={require('./img/pigP.png')} style={styles.pigLogo}/>
         </View>
         <View style={styles.textDetail}>
-          <Text style={styles.itemTextTop}>{props.text}</Text>
+          <Text style={styles.itemTextTop}></Text>
           <Text style={styles.itemTextMid}>200.00 <Text style={{ fontSize: 14, color: '#FFF'}}>บาท/กก.</Text></Text>
           <Text style={styles.itemTextBottom}>12/12/12</Text>
         </View>    
