@@ -51,7 +51,7 @@ const Account = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.footer}>
-                    <TouchableOpacity style={styles.logout}>
+                    <TouchableOpacity style={styles.logout} onPress={()=> navigation.navigate('Login')}>
                         <Text style={styles.logoutText}>Log out</Text>
                     </TouchableOpacity>
                 </View>

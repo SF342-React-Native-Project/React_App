@@ -118,6 +118,7 @@ import Login from './components/Login';
 import PriceChart from './components/PriceChart';
 import AcccountScreen from './components/AccountScreen';
 import HelpScreen from './components/HelpScreen';
+import Register from './components/RegisterScreen';
 
 const Stack = createStackNavigator();
 
@@ -125,9 +126,10 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator >
+      <Stack.Screen name="Login" component={Login} options={{ header: () => null }} />
         <Stack.Screen name="Home" component={Home} options={{ header: () => null }} />
         <Stack.Screen name="Detail" component={Detail} options={{ header: () => null }} />
-        <Stack.Screen name="Login" component={Login} options={{ header: () => null }} />
+        <Stack.Screen name="Register" component={Register} options={{ header: () => null }} />
         <Stack.Screen name="PriceChart" component={PriceChart} options={{ header: () => null }} />
         <Stack.Screen name="Account" component={AcccountScreen} options={{ header: () => null }} />
         <Stack.Screen name="Help" component={HelpScreen} options={{ header: () => null }} />

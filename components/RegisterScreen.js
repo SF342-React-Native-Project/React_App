@@ -1,22 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, TextInput, Image } from 'react-native';
-import { NavigationContainer, NavigationHelpersContext } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const Login = ({ navigation }) => {
+const Register = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.body}>
-            <TouchableOpacity style={{
-                backgroundColor: '#083370',
-                padding: 10,
-                borderRadius: 10,
-                marginLeft: 200,
-                marginTop: 20,
-            }}
-            onPress={()=> navigation.navigate('Home')}>
-                <Text style={{color: '#FFF', fontWeight: 'bold'}}>SKIP TO MAIN APP</Text>
-            </TouchableOpacity>
             <View style={styles.header}>
                 <Image source={require('./img/kspn.jpg')} style={styles.logo} />
                 <View style={styles.textContainer}>
@@ -27,14 +17,22 @@ const Login = ({ navigation }) => {
 
             <View style={styles.sectionContainer}>
                 <View style={styles.topSection}>
-                    <Text style={{ color: '#FFF', fontWeight: 'bold', fontSize: 30 }}>LOG IN</Text>
+                    <Text style={{ color: '#FFF', fontWeight: 'bold', fontSize: 30 }}>REGISTER</Text>
                 </View>
                 <View style={styles.inputContainer}>
-                    <Text style={styles.textInput}>Email</Text>
+                    <Text style={styles.textInput}>NAME</Text>
                     <TextInput
                         style={styles.input}
                     />
-                    <Text style={styles.textInput}>Password</Text>
+                    <Text style={styles.textInput}>EMAIL</Text>
+                    <TextInput
+                        style={styles.input}
+                    />
+                    <Text style={styles.textInput}>PASSWORD</Text>
+                    <TextInput
+                        style={styles.input}
+                    />
+                    <Text style={styles.textInput}>CONFIRM PASSWORD</Text>
                     <TextInput
                         style={styles.input}
                     />
@@ -43,11 +41,11 @@ const Login = ({ navigation }) => {
 
             <View style={styles.footer}>
                 <TouchableOpacity style={styles.loginContainer}>
-                    <Text style={styles.loginText}>Log in</Text>
+                    <Text style={styles.loginText}>Sign up</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.createAccountContainer} onPress={() => navigation.navigate('Register')}>
+                <TouchableOpacity style={styles.createAccountContainer} onPress={() => navigation.navigate('Login')}>
                     <Text style={styles.createAccountText}>
-                        Create a new Account
+                        Go to LOGIN
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -60,7 +58,7 @@ const Login = ({ navigation }) => {
     )
 }
 
-export default Login;
+export default Register;
 
 const styles = StyleSheet.create({
     createAccountText: {
@@ -78,7 +76,7 @@ const styles = StyleSheet.create({
         
     },
     loginContainer:{
-        marginBottom: 10,
+        
         backgroundColor: '#083370',
         paddingHorizontal: 40,
         paddingVertical: 10,
@@ -114,14 +112,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 10,
-        marginBottom: 3,
+        marginBottom: 5,
         marginTop: 5,
     },
     sectionContainer: {
         marginTop: 40,
         backgroundColor: '#083370',
         width: 300,
-        height: 220,
+        height: 350,
         borderRadius: 15,
     },
     textContainer: {
@@ -133,13 +131,12 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
     },
     header: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 50,
     },
     logo: {
         width: 130,
