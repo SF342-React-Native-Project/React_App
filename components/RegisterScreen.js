@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { authentication } from "../firebase/firebase-config";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
 const Register = ({ navigation }) => {
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const RegisterUser = () => {
+        createUserWithEmailAndPassword(authentication, email, password)
+        .then((res)=>{
+            console.log(res);
+            navigation.navigate('Home');
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }
+
     return (
         <SafeAreaView style={styles.body}>
             <View style={styles.header}>
@@ -27,10 +45,15 @@ const Register = ({ navigation }) => {
                     <Text style={styles.textInput}>EMAIL</Text>
                     <TextInput
                         style={styles.input}
+                        value={email}
+                        onChangeText={text => setEmail(text)}
                     />
                     <Text style={styles.textInput}>PASSWORD</Text>
                     <TextInput
                         style={styles.input}
+                        value={password}
+                        onChangeText={text => setPassword(text)}
+                        secureTextEntry={true}
                     />
                     <Text style={styles.textInput}>CONFIRM PASSWORD</Text>
                     <TextInput
@@ -40,7 +63,7 @@ const Register = ({ navigation }) => {
             </View>
 
             <View style={styles.footer}>
-                <TouchableOpacity style={styles.loginContainer}>
+                <TouchableOpacity style={styles.loginContainer} onPress={RegisterUser}>
                     <Text style={styles.loginText}>Sign up</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.createAccountContainer} onPress={() => navigation.navigate('Login')}>
@@ -128,6 +151,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
     body: {
+        backgroundColor: '#fff',
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
