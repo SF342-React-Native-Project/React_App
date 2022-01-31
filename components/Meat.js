@@ -1,83 +1,114 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  SafeAreaView,
+  ActivityIndicator,
+} from 'react-native';
+import {useEffect, useState} from 'react';
 
-const Meat = (props) => {
+const Meat = props => {
+  const URL = props.URLs;
+
+  const [isLoading, setLoading] = useState(true);
+  const [name, setName] = useState([]);
+  const [pricelist, setPricelist] = useState([]);
+
+  var date = '';
+  var price = 0;
+
+  async function fetchData() {
+    const res = await fetch(URL);
+    res
+      .json()
+      .then(res => {
+        setName(res.product_name),
+          setPricelist(res.price_list),
+          setLoading(false);
+      })
+      .catch(err => setErrors(err));
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (!isLoading) {
+    date = pricelist[pricelist.length-1].date.substring(0, 10);
+    price = (pricelist[pricelist.length-1].price_max + pricelist[pricelist.length-1].price_min) / 2;
+    console.log('Price:', price);
+  }
 
   return (
-    <View style={styles.item}>
-        <View style={styles.imageContainer}>
-          <Image source={require('./img/pigP.png')} style={styles.pigLogo}/>
+    <SafeAreaView>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <View style={styles.item}>
+          <View style={styles.imageContainer}>
+            <Image source={require('./img/pigP.png')} style={styles.pigLogo} />
+          </View>
+          <View style={styles.textDetail}>
+            <Text style={styles.itemTextTop}>{name}</Text>
+            <Text style={styles.itemTextMid}>
+              {price.toFixed(2)} <Text style={{fontSize: 12, color: '#FFF'}}> บาท/กก.</Text>
+            </Text>
+            <Text style={styles.itemTextBottom}>              ข้อมูลล่าสุด ณ วันที่ {date}</Text>
+          </View>
         </View>
-        <View style={styles.textDetail}>
-          <Text style={styles.itemTextTop}></Text>
-          <Text style={styles.itemTextMid}>200.00 <Text style={{ fontSize: 14, color: '#FFF'}}>บาท/กก.</Text></Text>
-          <Text style={styles.itemTextBottom}>12/12/12</Text>
-        </View>    
-    </View>
-  )
-}
+      )}
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
   itemTextTop: {
-    // maxWidth: '100%',
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     fontWeight: 'bold',
     fontSize: 14,
+    // fontFamily: 'BiskiDemo-Thin',
   },
   itemTextMid: {
-    // maxWidth: '100%',
-    color: "red",
+    color: 'red',
     fontWeight: 'bold',
     fontSize: 30,
+    marginBottom: 10,
   },
   itemTextBottom: {
-    // maxWidth: '100%',
-    color: "#FFFFFF",
+    color: '#FFFFFF',
     fontWeight: 'bold',
-    fontSize: 14,
+    fontSize: 9,
+    marginBottom: 5,
   },
   textDetail: {
     flex: 2,
     justifyContent: 'space-around',
-    margin: 10,
-  },  
+    marginTop: 10,
+    // fontFamily: 'BiskiDemo-Thin',
+  },
   imageContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 15,
-    
+    marginLeft: 7,
+    marginRight: 7,
   },
   pigLogo: {
     width: 100,
     height: 100,
     resizeMode: 'cover',
-  },  
+  },
   item: {
     backgroundColor: '#083370',
-    height: 200,
+    height: 110,
     borderRadius: 10,
     flexDirection: 'row',
     marginBottom: 20,
-  },
-  itemLeft: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-  },
-  square: {
-    width: 24,
-    height: 24,
-    backgroundColor: '#55BCF6',
-    opacity: 0.4,
-    borderRadius: 5,
-    marginRight: 15,
-  },
-  circular: {
-    width: 12,
-    height: 12,
-    borderColor: '#55BCF6',
-    borderWidth: 2,
-    borderRadius: 5,
+    marginLeft: 10,
+    marginRight: 10,
   },
 });
 
