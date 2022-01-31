@@ -18,7 +18,11 @@ const Meat = props => {
   const [pricelist, setPricelist] = useState([]);
 
   var date = '';
-  var price = 0;
+  var newPrice = 0;
+  var oldPrice = 0;
+  var priceDifference = 0;
+  var colorPrice = '#f2f2f2';
+  var imageTri = './img/equal.png';
 
   async function fetchData() {
     const res = await fetch(URL);
@@ -38,8 +42,25 @@ const Meat = props => {
 
   if (!isLoading) {
     date = pricelist[pricelist.length-1].date.substring(0, 10);
-    price = (pricelist[pricelist.length-1].price_max + pricelist[pricelist.length-1].price_min) / 2;
-    console.log('Price:', price);
+    newPrice = (pricelist[pricelist.length-1].price_max + pricelist[pricelist.length-1].price_min) / 2;
+    oldPrice = (pricelist[pricelist.length-2].price_max + pricelist[pricelist.length-2].price_min) / 2;
+    console.log("oldPrice:", oldPrice);
+    console.log("newPrice:", newPrice);
+    if (newPrice < oldPrice){
+      colorPrice = '#00d15a';
+      priceDifference = oldPrice - newPrice;
+      imageTri = require('./img/tri_up.png');
+    } 
+    if (newPrice == oldPrice) {
+      colorPrice = '#f2f2f2';
+      priceDifference = 0;
+      imageTri = require('./img/equal.png');
+    }
+    if (newPrice > oldPrice) {
+      colorPrice = '#ff1616';
+      priceDifference = newPrice - oldPrice;
+      imageTri = require('./img/tri_down.png');
+    }
   }
 
   return (
@@ -53,10 +74,13 @@ const Meat = props => {
           </View>
           <View style={styles.textDetail}>
             <Text style={styles.itemTextTop}>{name}</Text>
-            <Text style={styles.itemTextMid}>
-              {price.toFixed(2)} <Text style={{fontSize: 12, color: '#FFF'}}> บาท/กก.</Text>
+            <Text style={{color: colorPrice, fontWeight: 'bold', fontSize: 28, marginBottom: 10}}>
+              {newPrice.toFixed(2)} <Text style={{fontSize: 12, color: '#FFF'}}> บาท/กก.</Text>
             </Text>
             <Text style={styles.itemTextBottom}>              ข้อมูลล่าสุด ณ วันที่ {date}</Text>
+          </View>
+          <View style={styles.textDetailRight}>
+            <Text style={{fontSize: 12, color: colorPrice}}> <Image source={imageTri} style={{width: 20, height: 20,}}/> {priceDifference.toFixed(2)} </Text>
           </View>
         </View>
       )}
@@ -74,7 +98,7 @@ const styles = StyleSheet.create({
   itemTextMid: {
     color: 'red',
     fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 28,
     marginBottom: 10,
   },
   itemTextBottom: {
@@ -86,15 +110,19 @@ const styles = StyleSheet.create({
   textDetail: {
     flex: 2,
     justifyContent: 'space-around',
-    marginTop: 10,
-    // fontFamily: 'BiskiDemo-Thin',
+    marginTop: 6,
+  },
+  textDetailRight: {
+    justifyContent: 'space-around',
+    marginLeft: -40,
+    marginRight: 5,
   },
   imageContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 7,
-    marginRight: 7,
+    marginLeft: 5,
+    marginRight: 5,
   },
   pigLogo: {
     width: 100,
