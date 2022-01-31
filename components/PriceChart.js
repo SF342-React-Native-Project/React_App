@@ -8,7 +8,7 @@ import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-ta
 
 const PorkURL = "https://dataapi.moc.go.th/gis-product-prices?product_id=P11001&from_date=2021-12-15&to_date=2023-12-31"
 
-var plotData = [{},{},{},{},{},{},{}];
+var plotData = [{}, {}, {}, {}, {}, {}, {}];
 
 const PriceChart = ({ navigation }) => {
 
@@ -20,19 +20,19 @@ const PriceChart = ({ navigation }) => {
         const res = await fetch(PorkURL);
         res
             .json()
-            .then(res => {setData(res.price_list),setTitle(res.product_name), setLoading(false)})
+            .then(res => { setData(res.price_list), setTitle(res.product_name), setLoading(false) })
             .catch(err => setErrors(err));
     }
 
     useEffect(() => {
         fetchData();
-    },[])
+    }, [])
 
-    if(!isLoading){
-        for (var i = 0; i < 7; i++){
-            plotData[i] = {"x":data[i].date.substring(8, 10), "y":(data[i].price_min + data[i].price_max)/2}
+    if (!isLoading) {
+        for (var i = 0; i < 7; i++) {
+            plotData[i] = { "x": data[i].date.substring(8, 10), "y": (data[i].price_min + data[i].price_max) / 2 }
         }
-        console.log("this:",plotData)
+        console.log("this:", plotData)
     }
 
     return (
@@ -73,30 +73,30 @@ const PriceChart = ({ navigation }) => {
                         {/* Table */}
                         <SafeAreaView style={styles.tableMargin}>
 
-                            <Table borderStyle={{borderWidth: 2, borderColor: '#555555' }}>
+                            <Table borderStyle={{ borderWidth: 2, borderColor: '#555555' }}>
                                 <Row data={["รายการ", "วันที่", "ราคา\nต่ำสุด-สูงสุด", "ราคาเฉลี่ย"]} style={styles.firstTableRow} textStyle={styles.firstRowTextStyle} />
                             </Table>
 
-                                <FlatList
-                                    data={data}
-                                    inverted={true}
-                                    renderItem={({ item }) => (
+                            <FlatList
+                                data={data}
+                                inverted={true}
+                                renderItem={({ item }) => (
 
-                                        <View>
-                                            <Table borderStyle={{borderWidth: 2, borderColor: '#555555' }}>
-                                                <Row data={[title, item.date.substring(0, 10),[item.price_max, "/\n",item.price_min],
-                                                (item.price_min + item.price_max) / 2]} textStyle={styles.textStyle}/>
-                                            </Table>
-                                        </View>
+                                    <View>
+                                        <Table borderStyle={{ borderWidth: 2, borderColor: '#555555' }}>
+                                            <Row data={[title, item.date.substring(0, 10), [item.price_max, "/\n", item.price_min],
+                                                (item.price_min + item.price_max) / 2]} textStyle={styles.textStyle} />
+                                        </Table>
+                                    </View>
 
-                                    )}
-                                />
+                                )}
+                            />
 
                         </SafeAreaView>
                     </ScrollView>
                 )}
         </SafeAreaView>
-    ) 
+    )
 }
 
 const styles = StyleSheet.create({
@@ -138,13 +138,13 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 11,
         fontWeight: "bold",
-        padding:10,
+        padding: 10,
     },
 
     textStyle: {
         textAlign: "center",
         fontSize: 10,
-        padding:3,
+        padding: 3,
     },
 });
 

@@ -134,7 +134,7 @@ const App = () => {
         <Stack.Screen name="PriceChart" component={PriceChart} options={{ header: () => null }} />
         <Stack.Screen name="Account" component={AcccountScreen} options={{ header: () => null }} />
         <Stack.Screen name="Help" component={HelpScreen} options={{ header: () => null }} />
-        <Stack.Screen name="DetailPrice" component={DetailPrice}/>
+        <Stack.Screen name="DetailPrice" component={DetailPrice}  options={{ header: () => null }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
