@@ -30,10 +30,12 @@ const PriceChart = ({ navigation }) => {
 
     if (!isLoading) {
         for (var i = 0; i < 7; i++) {
-            plotData[i] = { "x": data[i].date.substring(8, 10), "y": (data[i].price_min + data[i].price_max) / 2 }
+          plotData[i] = { "x": data[data.length - i - 1].date.substring(8, 10), "y": (data[data.length - i - 1].price_min + data[data.length - i - 1].price_max) / 2 }
         }
+    
+        plotData = plotData.reverse()
         console.log("this:", plotData)
-    }
+      }
 
     return (
         <SafeAreaView>
