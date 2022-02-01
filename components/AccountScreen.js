@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
@@ -7,9 +7,36 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Entypo from "react-native-vector-icons/Entypo"
 import Ionicons from "react-native-vector-icons/Ionicons"
 
+import auth from '@react-native-firebase/auth';
+
 const Account = ({ navigation }) => {
-    return (
-        <SafeAreaView style={styles.body}>
+
+    const [initializing, setInitializing] = useState(true);
+    const [user, setUser] = useState();
+  
+    function onAuthStateChanged(user) {
+        setUser(user);
+        if (initializing) setInitializing(false);
+    }
+  
+    useEffect(() => {
+        const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+        return subscriber; // unsubscribe on unmount
+    }, []);
+
+    const SignOutUser = () => {
+        auth()
+        .signOut()
+        .then(() => {
+            navigation.navigate('Login')
+        });
+    }
+
+    if (initializing) return null;
+
+    if (!user) {
+        return (
+            <SafeAreaView style={styles.body}>
             <View style={styles.header}>
                 <Text style={styles.headerText}>ACCOUNT</Text>
             </View>
@@ -21,7 +48,7 @@ const Account = ({ navigation }) => {
                     <Text style={styles.nameText}>NAME</Text>
                 </View>
                 <View style={styles.textBottomImg2}>
-                    <Text>example@gmail.com</Text>
+                    <Text>example@test.com</Text>   
                 </View>
 
 
@@ -51,17 +78,63 @@ const Account = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.footer}>
-                    <TouchableOpacity style={styles.logout} onPress={()=> navigation.navigate('Login')}>
+                    <TouchableOpacity style={styles.logout} onPress={() => navigation.navigate('Login')}>
                         <Text style={styles.logoutText}>Log out</Text>
                     </TouchableOpacity>
                 </View>
             </View>
-
-
         </SafeAreaView>
+        )
+    }
 
+    return (
+        <SafeAreaView style={styles.body}>
+            <View style={styles.header}>
+                <Text style={styles.headerText}>ACCOUNT</Text>
+            </View>
+            <View style={styles.bodyContainer}>
+                <View style={styles.imageContainer}>
+                    <Image source={require('./img/user.png')} style={styles.imgUser} />
+                </View>
+                <View style={styles.textBottomImg}>
+                    <Text style={styles.nameText}>NAME</Text>
+                </View>
+                <View style={styles.textBottomImg2}>
+                    <Text>{user.email}</Text>   
+                </View>
 
+                <View style={styles.mainSection}>
+                    <TouchableOpacity style={styles.sectionHelp} onPress={()=> navigation.navigate("Help")}>
+                        <View style={styles.logoText}>
+                            <View style={styles.startLogo}>
+                                <FontAwesome5 name="phone-alt" color={'grey'} size={16} />
+                            </View>
+                            <Text style={styles.accountText}>Help</Text>
+                        </View>
+                        <View style={styles.endLogo}>
+                            <Entypo name="triangle-right" color={'grey'} size={22} />
+                        </View>
+                    </TouchableOpacity>
 
+                    <TouchableOpacity style={[styles.sectionHelp, { marginTop: 20, }]}>
+                        <View style={styles.logoText}>
+                            <View style={styles.startLogo}>
+                                <Ionicons name="ios-settings-sharp" color={'grey'} size={16} />
+                            </View>
+                            <Text style={styles.accountText}>Change Password</Text>
+                        </View>
+                        <View style={styles.endLogo}>
+                            <Entypo name="triangle-right" color={'grey'} size={22} />
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.footer}>
+                    <TouchableOpacity style={styles.logout} onPress={SignOutUser}>
+                        <Text style={styles.logoutText}>Log out</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </SafeAreaView>
     )
 }
 

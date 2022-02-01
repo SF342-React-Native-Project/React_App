@@ -7,7 +7,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { authentication } from "../firebase/firebase-config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
+/* Google SignIn */
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
+
 const Login = ({ navigation }) => {
+
+    GoogleSignin.configure({
+        webClientId: '136185337852-7a00mgbstaklop2ohm6n12gf2ct08klo.apps.googleusercontent.com',
+    });
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -23,8 +31,29 @@ const Login = ({ navigation }) => {
         })
     }
 
+    const GoogleSignInAsync = async () => {
+        // Get the users ID token
+        const { idToken } = await GoogleSignin.signIn();
+
+        // Create a Google credential with the token
+        const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+        // Sign-in the user with the credential
+        const user_sign_in =  auth().signInWithCredential(googleCredential);
+
+        user_sign_in
+        .then((user) => {
+            console.log(user)
+            navigation.navigate('Home');
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+
     return (
         <SafeAreaView style={styles.body}>
+            <ScrollView>
             <TouchableOpacity style={{
                 backgroundColor: '#083370',
                 padding: 10,
@@ -68,6 +97,9 @@ const Login = ({ navigation }) => {
                 <TouchableOpacity style={styles.loginContainer}>
                     <Text style={styles.loginText} onPress={SignInUser}>Log in</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.GoogleLoginContainer}>
+                    <Text style={styles.loginText} onPress={GoogleSignInAsync}>Google Log in</Text>
+                </TouchableOpacity>
                 <TouchableOpacity style={styles.createAccountContainer} onPress={() => navigation.navigate('Register')}>
                     <Text style={styles.createAccountText}>
                         Create a new Account
@@ -75,7 +107,7 @@ const Login = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
 
-
+            </ScrollView>
         </SafeAreaView>
 
 
@@ -180,4 +212,11 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginRight: 15,
     },
+    GoogleLoginContainer:{
+        marginBottom: 10,
+        backgroundColor: 'red',
+        paddingHorizontal: 40,
+        paddingVertical: 10,
+        borderRadius: 10,
+    }, 
 })
