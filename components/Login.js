@@ -36,7 +36,7 @@ const Login = ({ navigation }) => {
                 <Text style={{color: '#FFF', fontWeight: 'bold'}}>SKIP TO MAIN APP</Text>
             </TouchableOpacity>
             <View style={styles.header}>
-                <Image source={require('./img/kspn.jpg')} style={styles.logo} />
+                <Image source={require('./img/moc2.png')} style={styles.logo} />
                 <View style={styles.textContainer}>
                     <Text style={styles.textHeader}>กระทรวงพาณิชย์</Text>
                     <Text style={styles.textHeader2}>Ministry of Commerce</Text>
