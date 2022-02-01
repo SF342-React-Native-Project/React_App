@@ -70,7 +70,7 @@ const Meat = props => {
       ) : (
         <View style={styles.item}>
           <View style={styles.imageContainer}>
-            <Image source={require('./img/pigP.png')} style={styles.pigLogo} />
+            <Image source={require('./img/pigwhite.png')} style={styles.pigLogo} />
           </View>
           <View style={styles.textDetail}>
             <Text style={styles.itemTextTop}>{name}</Text>
@@ -125,8 +125,8 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   pigLogo: {
-    width: 100,
-    height: 100,
+    width: 120,
+    height: 120,
     resizeMode: 'cover',
   },
   item: {
