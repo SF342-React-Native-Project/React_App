@@ -4,13 +4,16 @@ import { NavigationContainer, NavigationHelpersContext } from '@react-navigation
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-
+/* Email SignIn */
 import { authentication } from "../firebase/firebase-config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 /* Google SignIn */
-import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/google-signin';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
+
+/* FaceBook SignIn */
+import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 
 const Login = ({ navigation }) => {
 
@@ -52,10 +55,41 @@ const Login = ({ navigation }) => {
             })
     }
 
+    const FaceBookSignInAsync = async () => {
+        // Attempt login with permissions
+        const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
+
+        if (result.isCancelled) {
+          throw 'User cancelled the login process';
+        }
+
+        // Once signed in, get the users AccesToken
+        const data = await AccessToken.getCurrentAccessToken();
+
+        if (!data) {
+          throw 'Something went wrong obtaining access token';
+        }
+
+        // Create a Firebase credential with the AccessToken
+        const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken);
+
+        // Sign-in the user with the credential
+        const user_sign_in = auth().signInWithCredential(facebookCredential);
+
+        user_sign_in
+        .then((user) => {
+            console.log(user)
+            navigation.navigate('Home');
+        })
+        .catch((err) => {
+            console.log('error')
+        })
+    } 
+
     return (
         <SafeAreaView style={styles.body}>
 
-            <TouchableOpacity style={{
+            {/* <TouchableOpacity style={{
                 backgroundColor: '#083370',
                 padding: 10,
                 borderRadius: 10,
@@ -64,7 +98,7 @@ const Login = ({ navigation }) => {
             }}
                 onPress={() => navigation.navigate('Home')}>
                 <Text style={{ color: '#FFF', fontWeight: 'bold' }}>SKIP TO MAIN APP</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <View style={styles.header}>
                 <Image source={require('./img/moc2.png')} style={styles.logo} />
                 <View style={styles.textContainer}>
@@ -93,16 +127,8 @@ const Login = ({ navigation }) => {
                         onChangeText={text => setPassword(text)}
                         secureTextEntry={true}
                     />
-                    {/* <GoogleSigninButton
-                        style={{ width: 192, height: 48, marginVertical: 5, borderRadius: 10, }}
-                        size={GoogleSigninButton.Size.Wide}
-                        color={GoogleSigninButton.Color.Light}
-                        onPress={GoogleSignInAsync}
-                    /> */}
-
                 </View>
             </View>
-
             <View style={styles.footer}>
 
                 <TouchableOpacity style={styles.loginContainer}>
@@ -115,11 +141,11 @@ const Login = ({ navigation }) => {
                     <Text style={{ fontSize: 20, fontWeight: 'bold', letterSpacing: -5, color: '#707070' }}>---------------------------------------</Text>
                 </View>
 
-                <TouchableOpacity style={styles.GoogleLoginContainer}>
+                <TouchableOpacity style={styles.SocialLoginContainer} onPress={GoogleSignInAsync}>
                     <Image source={require('./img/google.png')} style={styles.googleLogo} />
-                    <Text style={styles.loginGoogleText} onPress={GoogleSignInAsync}>Signin with Google</Text>
+                    <Text style={styles.loginGoogleText}>Signin with Google</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.GoogleLoginContainer}>
+                <TouchableOpacity style={styles.SocialLoginContainer} onPress={FaceBookSignInAsync}>
                     <Image source={require('./img/facebook.png')} style={styles.googleLogo} />
                     <Text style={styles.loginGoogleText}>Signin with Facebook</Text>
                 </TouchableOpacity>
@@ -130,12 +156,7 @@ const Login = ({ navigation }) => {
                     </Text>
                 </TouchableOpacity>
             </View>
-
-
         </SafeAreaView>
-
-
-
     )
 }
 
@@ -238,7 +259,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginRight: 15,
     },
-    GoogleLoginContainer: {
+    SocialLoginContainer: {
         backgroundColor: '#FFFFFF',
         width: 240,
         height: 35,

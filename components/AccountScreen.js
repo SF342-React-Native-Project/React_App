@@ -24,10 +24,11 @@ const Account = ({ navigation }) => {
         return subscriber; // unsubscribe on unmount
     }, []);
 
-    const SignOutUser = () => {
+    const SignOutUser = async () => {
         auth()
         .signOut()
         .then(() => {
+            console.log('Logout Successfully')
             navigation.navigate('Login')
         });
     }
