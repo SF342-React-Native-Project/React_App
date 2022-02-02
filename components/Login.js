@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
     sectionContainer: {
-        marginTop: 40,
+        marginTop: 35,
         backgroundColor: '#083370',
         width: 300,
         height: 220,
