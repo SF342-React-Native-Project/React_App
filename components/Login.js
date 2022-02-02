@@ -1,14 +1,15 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, Image } from 'react-native';
 import { NavigationContainer, NavigationHelpersContext } from '@react-navigation/native';
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+
 import { authentication } from "../firebase/firebase-config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 /* Google SignIn */
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 
 const Login = ({ navigation }) => {
@@ -22,13 +23,13 @@ const Login = ({ navigation }) => {
 
     const SignInUser = () => {
         signInWithEmailAndPassword(authentication, email, password)
-        .then((res) => {
-            console.log(res)
-            navigation.navigate('Home');
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+            .then((res) => {
+                console.log(res)
+                navigation.navigate('Home');
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     const GoogleSignInAsync = async () => {
@@ -39,21 +40,21 @@ const Login = ({ navigation }) => {
         const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
         // Sign-in the user with the credential
-        const user_sign_in =  auth().signInWithCredential(googleCredential);
+        const user_sign_in = auth().signInWithCredential(googleCredential);
 
         user_sign_in
-        .then((user) => {
-            console.log(user)
-            navigation.navigate('Home');
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+            .then((user) => {
+                console.log(user)
+                navigation.navigate('Home');
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     return (
         <SafeAreaView style={styles.body}>
-            <ScrollView>
+
             <TouchableOpacity style={{
                 backgroundColor: '#083370',
                 padding: 10,
@@ -61,8 +62,8 @@ const Login = ({ navigation }) => {
                 marginLeft: 200,
                 marginTop: 20,
             }}
-            onPress={()=> navigation.navigate('Home')}>
-                <Text style={{color: '#FFF', fontWeight: 'bold'}}>SKIP TO MAIN APP</Text>
+                onPress={() => navigation.navigate('Home')}>
+                <Text style={{ color: '#FFF', fontWeight: 'bold' }}>SKIP TO MAIN APP</Text>
             </TouchableOpacity>
             <View style={styles.header}>
                 <Image source={require('./img/moc2.png')} style={styles.logo} />
@@ -72,6 +73,8 @@ const Login = ({ navigation }) => {
                 </View>
             </View>
 
+
+            {/* Login Container */}
             <View style={styles.sectionContainer}>
                 <View style={styles.topSection}>
                     <Text style={{ color: '#FFF', fontWeight: 'bold', fontSize: 30 }}>LOG IN</Text>
@@ -90,16 +93,37 @@ const Login = ({ navigation }) => {
                         onChangeText={text => setPassword(text)}
                         secureTextEntry={true}
                     />
+                    {/* <GoogleSigninButton
+                        style={{ width: 192, height: 48, marginVertical: 5, borderRadius: 10, }}
+                        size={GoogleSigninButton.Size.Wide}
+                        color={GoogleSigninButton.Color.Light}
+                        onPress={GoogleSignInAsync}
+                    /> */}
+
                 </View>
             </View>
 
             <View style={styles.footer}>
+
                 <TouchableOpacity style={styles.loginContainer}>
                     <Text style={styles.loginText} onPress={SignInUser}>Log in</Text>
                 </TouchableOpacity>
+
+                <View style={{flexDirection: 'row'}}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', letterSpacing: -5, color: '#707070' }}>---------------------------------------</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#707070' }}> or </Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', letterSpacing: -5, color: '#707070' }}>---------------------------------------</Text>
+                </View>
+
                 <TouchableOpacity style={styles.GoogleLoginContainer}>
-                    <Text style={styles.loginText} onPress={GoogleSignInAsync}>Google Log in</Text>
+                    <Image source={require('./img/google.png')} style={styles.googleLogo} />
+                    <Text style={styles.loginGoogleText} onPress={GoogleSignInAsync}>Signin with Google</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.GoogleLoginContainer}>
+                    <Image source={require('./img/facebook.png')} style={styles.googleLogo} />
+                    <Text style={styles.loginGoogleText}>Signin with Facebook</Text>
+                </TouchableOpacity>
+
                 <TouchableOpacity style={styles.createAccountContainer} onPress={() => navigation.navigate('Register')}>
                     <Text style={styles.createAccountText}>
                         Create a new Account
@@ -107,7 +131,7 @@ const Login = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
 
-            </ScrollView>
+
         </SafeAreaView>
 
 
@@ -121,29 +145,31 @@ const styles = StyleSheet.create({
     createAccountText: {
         fontSize: 14,
         color: '#083370',
-    },  
+    },
     createAccountContainer: {
         margin: 5,
         padding: 5,
+        
     },
     loginText: {
         color: '#FFF',
         fontWeight: 'bold',
         fontSize: 16,
-        
+
     },
-    loginContainer:{
-        marginBottom: 10,
+    loginContainer: {
+        marginBottom: 5,
         backgroundColor: '#083370',
-        paddingHorizontal: 40,
+        paddingHorizontal: 100,
         paddingVertical: 10,
         borderRadius: 10,
-    },  
+    
+    },
     footer: {
-        marginTop: 40,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'center',
-    },  
+    },
     inputContainer: {
         alignItems: 'center',
     },
@@ -169,7 +195,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 10,
-        marginBottom: 3,
+
         marginTop: 5,
     },
     sectionContainer: {
@@ -194,7 +220,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 50,
+        marginTop: 30,
     },
     logo: {
         width: 130,
@@ -204,7 +230,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#083370',
         fontSize: 24,
-        
+
     },
     textHeader2: {
         fontWeight: 'bold',
@@ -212,11 +238,26 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginRight: 15,
     },
-    GoogleLoginContainer:{
-        marginBottom: 10,
-        backgroundColor: 'red',
-        paddingHorizontal: 40,
-        paddingVertical: 10,
+    GoogleLoginContainer: {
+        backgroundColor: '#FFFFFF',
+        width: 240,
+        height: 35,
+        padding: 5,
         borderRadius: 10,
-    }, 
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginVertical: 5,
+        elevation: 5,
+    },
+    loginGoogleText: {
+        color: '#707070',
+        fontWeight: 'bold',
+        fontSize: 16,
+        marginLeft: 20
+    },
+    googleLogo: {
+        width: 20,
+        height: 20,
+        marginLeft: 15,
+    }
 })
