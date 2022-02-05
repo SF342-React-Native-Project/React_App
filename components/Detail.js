@@ -103,7 +103,7 @@ const Detail = ({ navigation }) => {
       activeColor={'#707070'}
       inactiveColor={'#707070'}
       indicatorStyle={{ backgroundColor: '#083370', height: 3, }}
-      labelStyle={{ letterSpacing: 1, fontSize: 14 }}
+      labelStyle={{ letterSpacing: 1, fontSize: 14, fontFamily: 'Mitr-Regular' }}
       style={{ backgroundColor: '#f2f2f2', elevation: 0, marginLeft: 30, marginRight: 40 }}
     />
   );
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },  
   dropdownText: {
-    fontWeight: 'bold'
+    fontFamily: 'Mitr-Regular'
   },
   dropdown: {
     marginVertical: 10,
@@ -196,8 +196,8 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 34,
-    fontWeight: 'bold',
     color: '#083370',
+    fontFamily: 'Mitr-Regular'
   },
   header: {
     marginLeft: 20,

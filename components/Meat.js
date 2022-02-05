@@ -22,7 +22,8 @@ const Meat = props => {
   var oldPrice = 0;
   var priceDifference = 0;
   var colorPrice = '#f2f2f2';
-  var imageTri = './img/equal.png';
+  var imageTri = require('./img/equal.png');
+  var imageType = require('./img/pig.png');
 
   async function fetchData() {
     const res = await fetch(URL);
@@ -44,8 +45,6 @@ const Meat = props => {
     date = pricelist[pricelist.length-1].date.substring(0, 10);
     newPrice = (pricelist[pricelist.length-1].price_max + pricelist[pricelist.length-1].price_min) / 2;
     oldPrice = (pricelist[pricelist.length-2].price_max + pricelist[pricelist.length-2].price_min) / 2;
-    console.log("oldPrice:", oldPrice);
-    console.log("newPrice:", newPrice);
     if (newPrice < oldPrice){
       colorPrice = '#00d15a';
       priceDifference = oldPrice - newPrice;
@@ -61,6 +60,18 @@ const Meat = props => {
       priceDifference = newPrice - oldPrice;
       imageTri = require('./img/tri_down.png');
     }
+    if (name.substr(0, 4) == 'สุกร') {
+      imageType = require('./img/pig.png');
+    }
+    if (name.substr(0, 3) == 'ไก่') {
+      imageType = require('./img/chiken.png');
+    }
+    if (name.substr(0, 3) == 'ไข่') {
+      imageType = require('./img/egg.png');
+    }
+    if (name.substr(0, 7) == 'เนื้อโค') {
+      imageType = require('./img/cow.png');
+    }
   }
 
   return (
@@ -70,14 +81,14 @@ const Meat = props => {
       ) : (
         <View style={styles.item}>
           <View style={styles.imageContainer}>
-            <Image source={require('./img/pigwhite.png')} style={styles.pigLogo} />
+            <Image source={imageType} style={styles.pigLogo} />
           </View>
           <View style={styles.textDetail}>
             <Text style={styles.itemTextTop}>{name}</Text>
             <Text style={{color: colorPrice, fontWeight: 'bold', fontSize: 28, marginBottom: 10}}>
-              {newPrice.toFixed(2)} <Text style={{fontSize: 12, color: '#FFF'}}> บาท/กก.</Text>
+              {newPrice.toFixed(2)} <Text style={{fontSize: 12, color: '#FFF', fontFamily: 'Mitr-Regular'}}> บาท/กก.</Text>
             </Text>
-            <Text style={styles.itemTextBottom}>              ข้อมูลล่าสุด ณ วันที่ {date}</Text>
+            <Text style={styles.itemTextBottom}>ข้อมูลล่าสุด ณ วันที่ {date}</Text>
           </View>
           <View style={styles.textDetailRight}>
             <Text style={{fontSize: 12, color: colorPrice}}> <Image source={imageTri} style={{width: 20, height: 20,}}/> {priceDifference.toFixed(2)} </Text>
@@ -91,9 +102,8 @@ const Meat = props => {
 const styles = StyleSheet.create({
   itemTextTop: {
     color: '#FFFFFF',
-    fontWeight: 'bold',
     fontSize: 14,
-    // fontFamily: 'BiskiDemo-Thin',
+    fontFamily: 'Mitr-Regular',
   },
   itemTextMid: {
     color: 'red',
@@ -103,9 +113,9 @@ const styles = StyleSheet.create({
   },
   itemTextBottom: {
     color: '#FFFFFF',
-    fontWeight: 'bold',
-    fontSize: 9,
+    fontSize: 10,
     marginBottom: 5,
+    fontFamily: 'Mitr-Light',
   },
   textDetail: {
     flex: 2,
