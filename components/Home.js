@@ -46,7 +46,7 @@ const Home = ({ navigation }) => {
                     ),
                 }}
             />
-            <Tab.Screen
+            {/* <Tab.Screen
                 name="PriceChart"
                 component={PriceChart}
                 options={{
@@ -55,7 +55,7 @@ const Home = ({ navigation }) => {
                         <Entypo name="line-graph" color={color} size={32} />
                     ),
                 }}
-            />
+            /> */}
             <Tab.Screen
                 name="Account"
                 component={Account}

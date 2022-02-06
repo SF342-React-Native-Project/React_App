@@ -236,6 +236,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
+        marginTop: 10,
     },
     header: {
         flexDirection: 'row',
