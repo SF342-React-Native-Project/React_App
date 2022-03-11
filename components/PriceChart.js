@@ -9,6 +9,7 @@ import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-ta
 const PorkURL = "https://dataapi.moc.go.th/gis-product-prices?product_id=P11001&from_date=2021-12-15&to_date=2023-12-31"
 
 var plotData = [{}, {}, {}, {}, {}, {}, {}];
+var tableData = [];
 
 const PriceChart = ({ navigation }) => {
 
@@ -31,6 +32,14 @@ const PriceChart = ({ navigation }) => {
     if (!isLoading) {
         for (var i = 0; i < 7; i++) {
           plotData[i] = { "x": data[data.length - i - 1].date.substring(8, 10), "y": (data[data.length - i - 1].price_min + data[data.length - i - 1].price_max) / 2 }
+        }
+
+        for (var i = 0; i < data.length; i++) {
+            tableData.push({date: data[i].date,
+                            price_min: data[i].price_min,
+                            price_min: data[i].price_max
+            })
+            //  = { "x": data[data.length - i - 1].date.substring(8, 10), "y": (data[data.length - i - 1].price_min + data[data.length - i - 1].price_max) / 2 }
         }
     
         plotData = plotData.reverse()
@@ -77,10 +86,11 @@ const PriceChart = ({ navigation }) => {
 
                             <Table borderStyle={{ borderWidth: 2, borderColor: '#555555' }}>
                                 <Row data={["รายการ", "วันที่", "ราคา\nต่ำสุด-สูงสุด", "ราคาเฉลี่ย"]} style={styles.firstTableRow} textStyle={styles.firstRowTextStyle} />
+                                {/* <Row data={tableData}/> */}
                             </Table>
 
-                            <FlatList
-                                data={data}
+                            {/* <FlatList
+                                data={tableData}
                                 inverted={true}
                                 renderItem={({ item }) => (
 
@@ -92,7 +102,7 @@ const PriceChart = ({ navigation }) => {
                                     </View>
 
                                 )}
-                            />
+                            /> */}
 
                         </SafeAreaView>
                     </ScrollView>

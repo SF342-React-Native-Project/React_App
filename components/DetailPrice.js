@@ -11,6 +11,9 @@ const DetailPrice = ({ route, navigation }) => {
   const { URLs } = route.params;
 
   var plotData = [{}, {}, {}, {}, {}, {}, {}];
+  var tableData = [];
+
+  var testData = ["kuy", "12", "1", "3"]
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -24,6 +27,18 @@ const DetailPrice = ({ route, navigation }) => {
       .catch(err => setErrors(err));
   }
 
+
+  const renderTableData = data.map((data) => {
+    return (
+      <View>
+        <Row data={[title, data]} style={styles.firstTableRow} textStyle={styles.textStyle} />
+      </View>
+
+    )}
+  );
+  
+
+
   useEffect(() => {
     fetchData();
   }, [])
@@ -33,8 +48,18 @@ const DetailPrice = ({ route, navigation }) => {
       plotData[i] = { "x": data[data.length - i - 1].date.substring(8, 10), "y": (data[data.length - i - 1].price_min + data[data.length - i - 1].price_max) / 2 }
     }
 
+    for (var i = 0; i < data.length; i++) {
+      tableData.push([title,
+        data[i].date.substring(0, 10),
+        data[i].price_min,
+        data[i].price_max
+      ])
+    }
+
     plotData = plotData.reverse()
-    console.log("this:", plotData)
+    tableData = tableData.reverse()
+    // console.log("this:", plotData)
+    // console.log("this:", tableData)
   }
 
   return (
@@ -46,7 +71,7 @@ const DetailPrice = ({ route, navigation }) => {
             {/* Main Header */}
             <View style={styles.headerContainer}>
               <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Image source={require('./img/backIcon.png')} style={styles.backIcon} /> 
+                <Image source={require('./img/backIcon.png')} style={styles.backIcon} />
               </TouchableOpacity>
               <Text style={styles.headerText}>Graph</Text>
               <Text style={styles.FoodNameText}>{title}</Text>
@@ -82,22 +107,8 @@ const DetailPrice = ({ route, navigation }) => {
 
               <Table borderStyle={{ borderWidth: 2, borderColor: '#555555' }}>
                 <Row data={["รายการ", "วันที่", "ราคา\nต่ำสุด-สูงสุด", "ราคาเฉลี่ย"]} style={styles.firstTableRow} textStyle={styles.firstRowTextStyle} />
+                <Rows data={tableData} style={styles.firstTableRow} textStyle={styles.textStyle} />
               </Table>
-
-              <FlatList
-                data={data}
-                inverted={true}
-                renderItem={({ item }) => (
-
-                  <View>
-                    <Table borderStyle={{ borderWidth: 2, borderColor: '#555555' }}>
-                      <Row data={[title, item.date.substring(0, 10), [item.price_max, "/\n", item.price_min],
-                        (item.price_min + item.price_max) / 2]} textStyle={styles.textStyle} />
-                    </Table>
-                  </View>
-
-                )}
-              />
 
             </SafeAreaView>
           </ScrollView>
