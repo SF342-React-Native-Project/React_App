@@ -13,8 +13,6 @@ const DetailPrice = ({ route, navigation }) => {
   var plotData = [{}, {}, {}, {}, {}, {}, {}];
   var tableData = [];
 
-  var testData = ["kuy", "12", "1", "3"]
-
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [title, setTitle] = useState([]);
@@ -26,18 +24,6 @@ const DetailPrice = ({ route, navigation }) => {
       .then(res => { setData(res.price_list), setTitle(res.product_name), setLoading(false) })
       .catch(err => setErrors(err));
   }
-
-
-  const renderTableData = data.map((data) => {
-    return (
-      <View>
-        <Row data={[title, data]} style={styles.firstTableRow} textStyle={styles.textStyle} />
-      </View>
-
-    )}
-  );
-  
-
 
   useEffect(() => {
     fetchData();
@@ -105,9 +91,9 @@ const DetailPrice = ({ route, navigation }) => {
             {/* Table */}
             <SafeAreaView style={styles.tableMargin}>
 
-              <Table borderStyle={{ borderWidth: 2, borderColor: '#555555' }}>
+              <Table borderStyle={{ borderWidth: 2, borderColor: '#555555', borderRadius: 5}}>
                 <Row data={["รายการ", "วันที่", "ราคา\nต่ำสุด-สูงสุด", "ราคาเฉลี่ย"]} style={styles.firstTableRow} textStyle={styles.firstRowTextStyle} />
-                <Rows data={tableData} style={styles.firstTableRow} textStyle={styles.textStyle} />
+                <Rows data={tableData} textStyle={styles.textStyle} />
               </Table>
 
             </SafeAreaView>
