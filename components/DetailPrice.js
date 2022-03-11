@@ -1,21 +1,51 @@
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from '@react-navigation/native';
-import { View, Text, StyleSheet, SafeAreaView, FlatList, ActivityIndicator, Image, Button } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, FlatList, ActivityIndicator, Image, Button, Dimensions } from 'react-native';
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { VictoryBar, VictoryChart, VictoryGroup, VictoryLine, VictoryScatter, VictoryTheme } from 'victory-native';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+import {LineChart, BarChart, PieChart, ProgressChart, ContributionGraph, StackedBarChart } from "react-native-chart-kit";
+import Slider from '@react-native-community/slider';
+
 
 import Detail from "./Detail";
 
 const DetailPrice = ({ route, navigation }) => {
   const { URLs } = route.params;
 
-  var plotData = [{}, {}, {}, {}, {}, {}, {}];
-  var tableData = [];
+  var plotDataX = [];
+  var plotDataY = [];
+  var tableData = []; //***Display value in table
 
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [title, setTitle] = useState([]);
+  const [sliderValue, setSliderValue] = useState(7);
+
+  const screenWidth = Dimensions.get("window").width;
+
+  const chartConfig = {
+    backgroundGradientFrom: "#000000",
+    backgroundGradientFromOpacity: 0,
+    backgroundGradientTo: "#000000",
+    backgroundGradientToOpacity: 0,
+    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+    strokeWidth: 3, // optional, default 3
+    barPercentage: 0.5,
+    useShadowColorFromDataset: true
+  };
+
+  var chartdata = {
+    labels: plotDataX,
+    datasets: [
+      {
+        data: plotDataY,
+        color: (opacity = 1) => `rgba(2,50,113, ${opacity})`, // optional
+        strokeWidth: 2 // optional
+      }
+    ],
+    legend: ["Price in THB"] // optional
+  };
 
   async function fetchData() {
     const res = await fetch(URLs);
@@ -25,13 +55,53 @@ const DetailPrice = ({ route, navigation }) => {
       .catch(err => setErrors(err));
   }
 
+  const UpdateRange = () => {
+    plotDataX = [];
+    plotDataY = [];
+
+    for (var i = 0; i < sliderValue; i++) {
+      plotDataX.push(data[data.length - i - 1].date.substring(5, 10));
+      plotDataY.push((data[data.length - i - 1].price_min + data[data.length - i - 1].price_max) / 2);
+    }
+
+    plotDataX = plotDataX.reverse()
+    plotDataY = plotDataY.reverse()
+
+    chartdata = {
+      labels: plotDataX,
+      datasets: [
+        {
+          data: plotDataY,
+          color: (opacity = 1) => `rgba(2,50,113, ${opacity})`, // optional
+          strokeWidth: 2 // optional
+        }
+      ],
+      legend: ["Price in THB"] // optional
+    };
+
+    return (
+      <View>
+      <LineChart
+        style={styles.chartStyle}
+        data={chartdata}
+        width={screenWidth-20}
+        height={280}
+        chartConfig={chartConfig}
+        verticalLabelRotation={50}
+        bezier
+      />
+    </View>
+    );
+  }
+
   useEffect(() => {
     fetchData();
   }, [])
 
   if (!isLoading) {
     for (var i = 0; i < 7; i++) {
-      plotData[i] = { "x": data[data.length - i - 1].date.substring(8, 10), "y": (data[data.length - i - 1].price_min + data[data.length - i - 1].price_max) / 2 }
+      plotDataX.push(data[data.length - i - 1].date.substring(5, 10));
+      plotDataY.push((data[data.length - i - 1].price_min + data[data.length - i - 1].price_max) / 2);
     }
 
     for (var i = 0; i < data.length; i++) {
@@ -42,8 +112,9 @@ const DetailPrice = ({ route, navigation }) => {
       ])
     }
 
-    plotData = plotData.reverse()
     tableData = tableData.reverse()
+    plotDataX = plotDataX.reverse()
+    plotDataY = plotDataY.reverse()
     // console.log("this:", plotData)
     // console.log("this:", tableData)
   }
@@ -64,25 +135,22 @@ const DetailPrice = ({ route, navigation }) => {
             </View>
 
             {/* Chart */}
-            <View>
-              <VictoryChart theme={VictoryTheme.material} domainPadding={10}>
-                <VictoryGroup>
-                  <VictoryLine style={{
-                    data: { stroke: "#011f49" },
-                    parent: { border: "1px solid #ccc" }
-                  }}
-                    data={plotData}>
+            <UpdateRange/>
 
-                  </VictoryLine>
+            {/* Range Slider */}
+            <View style={styles.container}>
+              <Text style={styles.rangeSliderStyle}>Range: {sliderValue} days</Text>
+              <Slider
+                style={styles.SliderStyle}
+                minimumValue={1}
+                maximumValue={30}
+                step={1}
+                minimumTrackTintColor="#023271"
+                maximumTrackTintColor="#000000"
+                thumbTintColor="#023271"
+                onSlidingComplete={(value)=>{setSliderValue(value)}}
 
-                  <VictoryScatter
-                    style={{ data: { fill: "#011f49" } }}
-                    size={7}
-                    data={plotData}
-                  >
-                  </VictoryScatter>
-                </VictoryGroup>
-              </VictoryChart>
+              />
             </View>
 
             {/* Table Header */}
@@ -114,6 +182,23 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     marginLeft: 5,
+  },
+
+  chartStyle: {
+    paddingTop: 20,
+
+  },
+
+  rangeSliderStyle: {
+    paddingTop: 20,
+    justifyContent: "center",
+    textAlign: "center"
+  },
+  SliderStyle: {
+    justifyContent: "center",
+    textAlign: "center",
+    marginLeft: 50,
+    marginRight: 50
   },
 
   headerText: {
