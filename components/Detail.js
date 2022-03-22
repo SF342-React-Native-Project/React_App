@@ -8,7 +8,7 @@ import Entypo from 'react-native-vector-icons/Entypo'
 import Meat from './Meat';
 import DetailPrice from './DetailPrice';
 
-const URLs = ['https://dataapi.moc.go.th/gis-product-prices?product_id=P11001&from_date=2021-12-15&to_date=2023-12-31', 
+const URLMeat = ['https://dataapi.moc.go.th/gis-product-prices?product_id=P11001&from_date=2021-12-15&to_date=2023-12-31', 
               'https://dataapi.moc.go.th/gis-product-prices?product_id=P11002&from_date=2021-12-15&to_date=2023-12-31', 
               'https://dataapi.moc.go.th/gis-product-prices?product_id=P11003&from_date=2021-12-15&to_date=2023-12-31',
               'https://dataapi.moc.go.th/gis-product-prices?product_id=P11004&from_date=2021-12-15&to_date=2023-12-31',
@@ -53,8 +53,99 @@ const URLs = ['https://dataapi.moc.go.th/gis-product-prices?product_id=P11001&fr
               'https://dataapi.moc.go.th/gis-product-prices?product_id=P11043&from_date=2021-12-15&to_date=2023-12-31',
               ];
 
+const URLVegetable = ['https://dataapi.moc.go.th/gis-product-prices?product_id=P13001&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13002&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13003&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13004&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13005&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13006&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13007&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13008&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13009&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13010&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13011&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13012&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13013&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13014&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13015&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13016&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13017&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13018&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13019&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13020&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13021&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13022&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13023&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13024&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13025&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13026&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13027&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13028&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13029&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13030&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13031&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13032&from_date=2021-12-15&to_date=2023-12-31', 
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P13033&from_date=2021-12-15&to_date=2023-12-31',
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P13034&from_date=2021-12-15&to_date=2023-12-31', 
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P13035&from_date=2021-12-15&to_date=2023-12-31',
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P13036&from_date=2021-12-15&to_date=2023-12-31', 
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P13037&from_date=2021-12-15&to_date=2023-12-31',
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P13038&from_date=2021-12-15&to_date=2023-12-31', 
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P13039&from_date=2021-12-15&to_date=2023-12-31',
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P13040&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13041&from_date=2021-12-15&to_date=2023-12-31',
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P13042&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13043&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13044&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13045&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P13046&from_date=2021-12-15&to_date=2023-12-31',
+              ];
+
+const URLFruit = ['https://dataapi.moc.go.th/gis-product-prices?product_id=P14001&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14002&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14003&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14004&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14005&from_date=2021-12-15&to_date=2023-12-31',
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P14006&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14007&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14008&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14009&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14010&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14011&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14012&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14013&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14014&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14015&from_date=2021-12-15&to_date=2023-12-31',
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P14016&from_date=2021-12-15&to_date=2023-12-31', 
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P14017&from_date=2021-12-15&to_date=2023-12-31',
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P14018&from_date=2021-12-15&to_date=2023-12-31', 
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P14019&from_date=2021-12-15&to_date=2023-12-31',
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P14020&from_date=2021-12-15&to_date=2023-12-31', 
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P14021&from_date=2021-12-15&to_date=2023-12-31',
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P14022&from_date=2021-12-15&to_date=2023-12-31', 
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P14023&from_date=2021-12-15&to_date=2023-12-31',
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P14024&from_date=2021-12-15&to_date=2023-12-31', 
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P14025&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14026&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14027&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14028&from_date=2021-12-15&to_date=2023-12-31', 
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P14029&from_date=2021-12-15&to_date=2023-12-31',
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P14030&from_date=2021-12-15&to_date=2023-12-31', 
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P14031&from_date=2021-12-15&to_date=2023-12-31',
+              // 'https://dataapi.moc.go.th/gis-product-prices?product_id=P14032&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14033&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14034&from_date=2021-12-15&to_date=2023-12-31', 
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14035&from_date=2021-12-15&to_date=2023-12-31',
+              'https://dataapi.moc.go.th/gis-product-prices?product_id=P14036&from_date=2021-12-15&to_date=2023-12-31', 
+              ];
+
 var forLoopMeat = [];
-var stopFor = false;
+var forLoopVegetable = [];
+var forLoopFruit = [];
+
+var stopForMeat = false;
+var stopForVegetable = false;
+var stopForFruit = false;
 
 const FirstRoute = () => (
   <ScrollView style={styles.first}>
@@ -67,16 +158,18 @@ const FirstRoute = () => (
 
 const SecondRoute = () => (
   <ScrollView style={styles.second}>
+    <View style={{ paddingTop: 20, }}></View>
     <View>
-      <Text>Hi</Text>
+      {forLoopVegetable}
     </View>
   </ScrollView>
 );
 
 const ThirdRoute = () => (
   <ScrollView style={styles.third}>
+    <View style={{ paddingTop: 20, }}></View>
     <View>
-      <Text>Hello Hi</Text>
+      {forLoopFruit}
     </View>
   </ScrollView>
 );
@@ -93,7 +186,7 @@ const Detail = ({ navigation }) => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
     { key: 'first', title: 'เนื้อสัตว์' },
-    { key: 'second', title: 'ผักใบ/ผล' },
+    { key: 'second', title: 'ผัก' },
     { key: 'third', title: 'ผลไม้' },
   ]);
 
@@ -108,17 +201,38 @@ const Detail = ({ navigation }) => {
     />
   );
 
-  if (stopFor == false) {
-    for (let i = 0; i < URLs.length; i++) {
+  if (stopForMeat == false) {
+    for (let i = 0; i < URLMeat.length; i++) {
       forLoopMeat.push(
-        <TouchableOpacity style={{ paddingHorizontal: 20 }} onPress={() => { navigation.navigate('DetailPrice', { URLs: URLs[i] }); }}>
-          <Meat URLs={URLs[i]} />
+        <TouchableOpacity style={{ paddingHorizontal: 20 }} onPress={() => { navigation.navigate('DetailPrice', { URLs: URLMeat[i] }); }}>
+          <Meat URLs={URLMeat[i]} />
         </TouchableOpacity>
       )
     };
-    stopFor = true;
+    stopForMeat = true;
   }
-  
+
+  if (stopForVegetable == false) {
+    for (let i = 0; i < URLVegetable.length; i++) {
+      forLoopVegetable.push(
+        <TouchableOpacity style={{ paddingHorizontal: 20 }} onPress={() => { navigation.navigate('DetailPrice', { URLs: URLVegetable[i] }); }}>
+          <Meat URLs={URLVegetable[i]} />
+        </TouchableOpacity>
+      )
+    };
+    stopForVegetable = true;
+  }
+
+  if (stopForFruit == false) {
+    for (let i = 0; i < URLFruit.length; i++) {
+      forLoopFruit.push(
+        <TouchableOpacity style={{ paddingHorizontal: 20 }} onPress={() => { navigation.navigate('DetailPrice', { URLs: URLFruit[i] }); }}>
+          <Meat URLs={URLFruit[i]} />
+        </TouchableOpacity>
+      )
+    };
+    stopForFruit = true;
+  }
 
   return (
     <View style={styles.body}>

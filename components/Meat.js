@@ -60,6 +60,8 @@ const Meat = props => {
       priceDifference = newPrice - oldPrice;
       imageTri = require('./img/tri_down.png');
     }
+
+    // Meat
     if (name.substr(0, 4) == 'สุกร') {
       imageType = require('./img/pig.png');
     }
@@ -71,6 +73,70 @@ const Meat = props => {
     }
     if (name.substr(0, 7) == 'เนื้อโค') {
       imageType = require('./img/cow.png');
+    }
+
+    // Vegetable
+    if (name.substr(0, 3) == 'ผัก') {
+      imageType = require('./img/vegetable.png');
+    }
+    if (name.substr(0, 6) == 'กะหล่ำ') {
+      imageType = require('./img/vegetable.png');
+    }
+    if (name.substr(0, 4) == 'มะระ') {
+      imageType = require('./img/vegetable.png');
+    }
+    if (name.substr(0, 6) == 'มะเขือ') {
+      imageType = require('./img/vegetable.png');
+    }
+    if (name.substr(0, 4) == 'ถั่ว') {
+      imageType = require('./img/vegetable.png');
+    }
+    if (name.substr(0, 6) == 'แตงกวา') {
+      imageType = require('./img/vegetable.png');
+    }
+    if (name.substr(0, 3) == 'ฟัก') {
+      imageType = require('./img/vegetable.png');
+    }
+    if (name.substr(0, 9) == 'หัวผักกาด') {
+      imageType = require('./img/vegetable.png');
+    }
+    if (name.substr(0, 7) == 'หน่อไม้') {
+      imageType = require('./img/vegetable.png');
+    }
+    if (name.substr(0, 7) == 'ข้าวโพด') {
+      imageType = require('./img/vegetable.png');
+    }
+    if (name.substr(0, 5) == 'มะนาว') {
+      imageType = require('./img/vegetable.png');
+    }
+    if (name.substr(0, 3) == 'ขิง') {
+      imageType = require('./img/vegetable.png');
+    }
+
+    // Fruit
+    if (name.substr(0, 3) == 'ส้ม') {
+      imageType = require('./img/fruit.png');
+    }
+    if (name.substr(0, 6) == 'มะละกอ') {
+      imageType = require('./img/fruit.png');
+    }
+    if (name.substr(0, 5) == 'แตงโม') {
+      imageType = require('./img/fruit.png');
+    }
+    if (name.substr(0, 5) == 'กล้วย') {
+      imageType = require('./img/fruit.png');
+    }
+    if (name.substr(0, 5) == 'ฝรั่ง') {
+      imageType = require('./img/fruit.png');
+    }
+    if (name.substr(0, 6) == 'มะม่วง') {
+      imageType = require('./img/fruit.png');
+    }
+    if (name.substr(0, 7) == 'สับปะรด') {
+      imageType = require('./img/fruit.png');
+    }
+    if (name.substr(0, 5) == 'ส้มโอ') {
+      imageType = require('./img/fruit.png');
     }
   }
 
