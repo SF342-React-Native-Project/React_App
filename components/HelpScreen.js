@@ -1,12 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Entypo from 'react-native-vector-icons/Entypo'
+import { launchImageLibrary } from 'react-native-image-picker';
 
 const Help = ({ navigation }) => {
+
+    const [imageUri, setimageUri] = useState('');
+
+    const selectImage = () => {
+        const options = {
+            maxWidth: 2000,
+            maxHeight: 2000,
+            storageOptions: {
+                skipBackup: true,
+                path: 'images',
+            },
+        }
+
+        launchImageLibrary(options, response => {
+            if (response.didCancel) {
+                    //console.log('User cancelled image picker');
+            } 
+            else if (response.error) {
+                   //console.log('ImagePicker Error: ', response.error);
+            } 
+            else if (response.customButton) {
+                    //onsole.log('User tapped custom button: ', response.customButton);
+            } 
+            else {
+                    const source = {uri: response.uri}
+                    const imgsuc = 'Upload Successfully'
+                    setimageUri(imgsuc)
+              };
+        })
+    }
+
     return (
         <SafeAreaView style={styles.body}>
             <View style={styles.header}>
@@ -48,11 +80,11 @@ const Help = ({ navigation }) => {
                     </View>
 
                     <View style={styles.chosefile} >
-                        <TouchableOpacity style={styles.buttonChoseFile}>
+                        <TouchableOpacity style={styles.buttonChoseFile} onPress={selectImage}>
                             <Text style={styles.textC}>Choose</Text>
                         </TouchableOpacity>
                         <View style={styles.startText}>
-                            <Text style={styles.text}>เลือกไฟล์</Text>
+                            <Text style={styles.text}>{imageUri}</Text>
                         </View>
                     </View>
                 </View>
