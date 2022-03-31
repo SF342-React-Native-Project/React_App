@@ -10,32 +10,21 @@ import { launchImageLibrary } from 'react-native-image-picker';
 const Help = ({ navigation }) => {
 
     const [imageUri, setimageUri] = useState('');
+    const [imagUpload, setImageUpload] = useState('');
 
-    const selectImage = () => {
+    const selectImage = async () => {
         const options = {
-            maxWidth: 2000,
-            maxHeight: 2000,
-            storageOptions: {
-                skipBackup: true,
-                path: 'images',
-            },
+            noData: true
         }
 
-        launchImageLibrary(options, response => {
-            if (response.didCancel) {
-                    //console.log('User cancelled image picker');
-            } 
-            else if (response.error) {
-                   //console.log('ImagePicker Error: ', response.error);
-            } 
-            else if (response.customButton) {
-                    //onsole.log('User tapped custom button: ', response.customButton);
-            } 
-            else {
-                    const source = {uri: response.uri}
-                    const imgsuc = 'Upload Successfully'
-                    setimageUri(imgsuc)
-              };
+        await launchImageLibrary(options, response => {
+            if (true) {
+                console.log("IMAGE")
+                console.log(response.assets[0].uri)
+                setimageUri(response.assets[0].uri)
+                console.log("This is IMage URI", imageUri)
+                
+            }
         })
     }
 
@@ -84,9 +73,13 @@ const Help = ({ navigation }) => {
                             <Text style={styles.textC}>Choose</Text>
                         </TouchableOpacity>
                         <View style={styles.startText}>
-                            <Text style={styles.text}>{imageUri}</Text>
+                            <Text style={styles.text}>{imagUpload}</Text>
                         </View>
                     </View>
+                </View>
+
+                <View>
+                    <Image source={{uri: imageUri}} style={{width: 25, height: 25}} />
                 </View>
 
                 <View style={styles.footer}>
