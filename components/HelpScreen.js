@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, Linking } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,6 +11,7 @@ const Help = ({ navigation }) => {
 
     const [imageUri, setimageUri] = useState('');
     const [imagUpload, setImageUpload] = useState('');
+    const [detail, setDetail] = useState('');
 
     const selectImage = async () => {
         const options = {
@@ -26,6 +27,11 @@ const Help = ({ navigation }) => {
                 
             }
         })
+    }
+
+    const sendMail = async () => {
+        console.log('kuy :',imageUri)
+        await Linking.openURL(`mailto:macchayaphol@hotmail.com?subject=ร้องเรียนปัญหา&body=${detail}<br><a href=''>รูปที่แนบมา<a/>`)
     }
 
     return (
@@ -59,11 +65,12 @@ const Help = ({ navigation }) => {
                         <TextInput
                             style={styles.inputBody}
                             multiline
+                            onChangeText={text => setDetail(text)}
                         />
                     </View>
                 </View>
 
-                <View style={styles.chosefileContainer}>
+                {/* <View style={styles.chosefileContainer}>
                     <View style={styles.inputHeader}>
                         <Text style={styles.text}>file or picture</Text>
                     </View>
@@ -76,14 +83,14 @@ const Help = ({ navigation }) => {
                             <Text style={styles.text}>{imagUpload}</Text>
                         </View>
                     </View>
-                </View>
-
+                </View> */}
+{/* 
                 <View>
-                    <Image source={{uri: imageUri}} style={{width: 25, height: 25}} />
-                </View>
+                    <Image source={{uri: imageUri}} style={{width: 25, height: 25}}  />
+                </View> */}
 
                 <View style={styles.footer}>
-                    <TouchableOpacity style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.buttonContainer} onPress={sendMail}>
                         <Text style={styles.sendText}>
                             SEND
                         </Text>
